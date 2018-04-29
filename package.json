@@ -1,0 +1,38 @@
+{
+  "name": "damaydem-rest-server",
+  "version": "1.0.0",
+  "description": "server http pour api rest",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saand66/damaydem-rest-server.git"
+  },
+  "keywords": [
+    "server",
+    "http",
+    "api",
+    "rest",
+    "damaydem"
+  ],
+  "author": "l@@t",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saand66/damaydem-rest-server/issues"
+  },
+  "homepage": "https://github.com/saand66/damaydem-rest-server#readme",
+  "dependencies": {
+    "async": "^2.6.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "mysql": "^2.15.0",
+    "sequelize": "^3.32.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
