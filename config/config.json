@@ -1,0 +1,31 @@
+{
+  "development": {
+    "username": "damaydem_root",
+    "password": "fabily01",
+    "database": "damaydem_DEV+",
+    "host": "damaydem.com",
+    "dialect": "mysql",
+    "port": "3306"
+  
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "database_test",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": "8889"
+   
+  },
+  "production": {
+    "username": "root",
+    "password": "root",
+    "database": "database_production",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": "8889"
+    
+  }
+
+ 
+}
