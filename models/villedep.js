@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   VilleDep.associate = function(models) {
     // associations can be defined here
+    models.VilleDep.belongsTo(models.DepArr); 
   };
   return VilleDep;
 };

@@ -1,35 +1,17 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Trajets', {
+    return queryInterface.createTable('DepArrs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      UserId: {
-        type: Sequelize.INTEGER,
-        REFERENCES:{
-          models:'Users',
-          key:'id',
-        }
-      },
-      lieuDep: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      
-      dateDep: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      heureDep: {
-        allowNull: false,
+      VilleArrs_id: {
         type: Sequelize.INTEGER
       },
-      tarifvoy: {
-        allowNull: false,
+      villeDeps_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -43,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Trajets');
+    return queryInterface.dropTable('DepArrs');
   }
 };

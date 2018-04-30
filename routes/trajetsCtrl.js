@@ -37,7 +37,7 @@ module.exports = {
   console.log("lreq.body.lieuArr " , req.body.lieuArr);
 
 
-    if (lieuDep == null || lieuArr == null || lieuDep_id == null || lieuArr_id == null || dateDep == null || heureDep == null || tarifvoy == null || nbplace == null) {
+    if (lieuDep == null || lieuArr == null || dateDep == null || heureDep == null || tarifvoy == null || nbplace == null) {
      
       return res.status(400).json({ 'error': ' Parametres manquants' });
     }
@@ -64,11 +64,11 @@ module.exports = {
 
         console.log("le userFound.id " + userFound.id);
 
+       
           models.Trajet.create({
             lieuDep: lieuDep,
             lieuArr: lieuArr,
-            lieuDep_id: lieuDep_id,
-            lieuArr_id: lieuArr_id,
+            DepArrs_id:'1',
             dateDep: dateDep,
             heureDep: heureDep,
             tarifvoy: tarifvoy,
@@ -76,7 +76,9 @@ module.exports = {
             nbplacedispo: nbplace,
             UserId: userFound.id
           })
+         
             .then(function (newTrajet) {
+              
               done(newTrajet);
             });
         } else {
@@ -117,15 +119,7 @@ Listtrajet :function (req, res){
       include: [{
         model: models.User,
         attributes: [ 'prenom', 'nom' ], 
-      }],
-      include: [{
-        model: models.VilleDep,
-        attributes: [ 'nom', 'img1' ],
-      }],
-      include: [{
-        model: models.User,
-        attributes: [ 'prenom', 'nom' ], 
-      }],
+      }]
      
         
     }).then(function(trajets) {
