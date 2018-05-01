@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      UserId: DataTypes.INTEGER,
      nbplace: DataTypes.INTEGER,
      nbplacedispo: DataTypes.INTEGER,
-     lieuDep_id: DataTypes.INTEGER,
-     lieuArr_id: DataTypes.INTEGER
+     VilleArrId: DataTypes.INTEGER,
+     VilleDepId: DataTypes.INTEGER
   }, {});
   Trajet.associate = function(models) {
     // associations can be defined here
@@ -19,8 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     }),
-    models.Trajet.belongsTo(models.DepArr,{
-      foreignKey:'DepArrs_id',
+    models.Trajet.belongsTo(models.VilleArr,{
+      foreignKey:'VilleArrId',
+    }),
+    models.Trajet.belongsTo(models.VilleDep,{
+      foreignKey:'VilleDepId',
     })
   };
   return Trajet;

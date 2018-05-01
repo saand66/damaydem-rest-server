@@ -123,14 +123,22 @@ Listtrajet :function (req, res){
       //include: [{
        // model: models.DepArr,
         //    attributes: [ 'VilleArrs_id', 'VilleDeps_id', 'Trajets_id' ], 
-            include: [{
-              model: models.DepArr,
-              include: [{
-                model: models.VilleArr,
-                attributes: [ 'nom', 'img1', 'lati', 'longi' ], 
-                required: false
-              }]
-            }]
+            include: [
+            {
+              model: models.User,
+              attributes: [ 'prenom', 'nom','numtel' ], 
+            },
+            {
+              model: models.VilleArr,  
+              attributes: [ 'nom', 'longi','lati','img1' ],     
+            },
+            {
+              model: models.VilleDep,  
+              attributes: [ 'nom', 'longi','lati','img1' ],     
+            }
+            
+          
+          ]
      // }]
      
      

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   VilleArr.associate = function(models) {
     // associations can be defined here
+    models.VilleArr.hasMany(models.Trajet)
   };
   return VilleArr;
 };

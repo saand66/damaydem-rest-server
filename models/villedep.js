@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   VilleDep.associate = function(models) {
     // associations can be defined here    
+    models.VilleDep.hasMany(models.Trajet)
   };
   return VilleDep;
 };
