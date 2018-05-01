@@ -64,12 +64,12 @@ module.exports = {
 
         console.log("le userFound.id " + userFound.id);
 
-       
           models.Trajet.create({
             lieuDep: lieuDep,
             lieuArr: lieuArr,
-            DepArrs_id:'1',
             dateDep: dateDep,
+            lieuArr_id:lieuDep,
+            lieuDep_id:lieuDep,
             heureDep: heureDep,
             tarifvoy: tarifvoy,
             nbplace: nbplace,
@@ -116,10 +116,23 @@ Listtrajet :function (req, res){
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       limit: (!isNaN(limit)) ? limit : null,
       offset: (!isNaN(offset)) ? offset : null,
-      include: [{
+     /* include: [{
         model: models.User,
         attributes: [ 'prenom', 'nom' ], 
-      }]
+      }]*/
+      //include: [{
+       // model: models.DepArr,
+        //    attributes: [ 'VilleArrs_id', 'VilleDeps_id', 'Trajets_id' ], 
+            include: [{
+              model: models.DepArr,
+              include: [{
+                model: models.VilleArr,
+                attributes: [ 'nom', 'img1', 'lati', 'longi' ], 
+                required: false
+              }]
+            }]
+     // }]
+     
      
         
     }).then(function(trajets) {

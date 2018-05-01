@@ -6,6 +6,15 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   DepArr.associate = function(models) {
     // associations can be defined here
+    models.DepArr.belongsTo(models.VilleDep,{
+      foreignKey:'VilleDep_id',
+    }),
+    models.DepArr.belongsTo(models.VilleArr,{
+      foreignKey:'VilleArr_id',
+    }),
+    models.DepArr.belongsTo(models.Trajet,{
+      foreignKey:'Trajets_id',
+    })
   };
   return DepArr;
 };
