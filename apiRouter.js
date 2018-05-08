@@ -4,6 +4,7 @@ var express  = require ('express');
 var userCtrl = require ('./routes/usersCtrl');
 var trajetCtrl = require ('./routes/trajetsCtrl');
 var reserCtrl  = require ('./routes/reservCtrl');
+var offreVenteCtrl  = require ('./routes/offreVenteCtrl');
 
 // Router
 
@@ -28,6 +29,11 @@ apiRouter.route('/trajets/').get(trajetCtrl.Listtrajet);
 apiRouter.route('/reservation/new').post(reserCtrl.reserver);
 apiRouter.route('/reservation/modif').post(reserCtrl.modifreserv);
 apiRouter.route('/reservation/annul').post(reserCtrl.annulreserv);
+
+//OffresVentes routes
+apiRouter.route('/offreVentes/new/').post(offreVenteCtrl.createOffreVente);
+apiRouter.route('/offreVentes/').get(offreVenteCtrl.listoffreVentre);
+
 
 return apiRouter;
 })();
