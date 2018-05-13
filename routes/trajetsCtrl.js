@@ -141,7 +141,7 @@ Listtrajet :function (req, res){
           ]
      // }]
      
-     
+  
         
     }).then(function(trajets) {
       if (trajets) {
