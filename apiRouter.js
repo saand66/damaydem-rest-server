@@ -38,6 +38,7 @@ apiRouter.route('/offreVentes/').get(offreVenteCtrl.listoffreVentre);
 //Marques and Modeles
 apiRouter.route('/marques/').get(marquesCtrl.getAllMarque);
 apiRouter.route('/marques/modeles').post(marquesCtrl.gelmodelByMarque);
+apiRouter.route('/marques/infos').post(marquesCtrl.getVoitByCritere);
 
 
 return apiRouter;

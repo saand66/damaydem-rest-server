@@ -18,10 +18,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       prix: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       kilometrage: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       boitevit: {
         type: Sequelize.STRING
