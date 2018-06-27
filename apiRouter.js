@@ -22,7 +22,7 @@ apiRouter.route('/users/me/').put(userCtrl.updateUserProfile);
 
 //Trajet routes
 
-apiRouter.route('/trajets/new/').post(trajetCtrl.CreateTrajet);
+apiRouter.route('/trajets/new').post(trajetCtrl.CreateTrajet);
 apiRouter.route('/trajets/').get(trajetCtrl.Listtrajet);
 
 //Reservation routes
@@ -34,11 +34,11 @@ apiRouter.route('/reservation/annul').post(reserCtrl.annulreserv);
 //OffresVentes routes
 apiRouter.route('/offreVentes/new/').post(offreVenteCtrl.createOffreVente);
 apiRouter.route('/offreVentes/').get(offreVenteCtrl.listoffreVentre);
+apiRouter.route('/offreVentes/filtre/').post(offreVenteCtrl.getOffreVenteByCritere);
 
 //Marques and Modeles
-apiRouter.route('/marques/').get(marquesCtrl.getAllMarque);
+apiRouter.route('/marques').get(marquesCtrl.getAllMarque);
 apiRouter.route('/marques/modeles').post(marquesCtrl.gelmodelByMarque);
-apiRouter.route('/marques/infos').post(marquesCtrl.getVoitByCritere);
 
 
 return apiRouter;

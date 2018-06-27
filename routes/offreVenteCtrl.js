@@ -1,7 +1,7 @@
 var jwtutils = require ('../utils/jwt.utils');
 var models = require('../models');
 var asyncLib = require('async');
-
+var Sequelize = require('sequelize');
 
 //const
 const TARIF_MIN = 0;
@@ -19,7 +19,8 @@ module.exports = {
     var userId = jwtutils.getUserId(headerAuth);
 
     console.log("le user ID est " + userId);
-//Parametres 
+
+  //Parametres 
 
   var marque = req.body.marque;
   var model = req.body.model;
@@ -38,10 +39,8 @@ module.exports = {
  
 
     if (marque == null || model == null || annee == null || carburant == null || prix == null || kilometrage == null) {
-     
       return res.status(400).json({ 'error': ' Infos manquantes pour votre offre' });
     }
-
 
     asyncLib.waterfall([
         function(done) {
@@ -59,7 +58,7 @@ module.exports = {
           if(userFound) {
 
           models.OffreVente.create({
-             marque:  marque,
+             marque: marque,
              model: model,
              annee: annee,
              carburant: carburant,
@@ -106,7 +105,8 @@ listoffreVentre :function (req, res){
     var limit   = parseInt(req.query.limit);
     var offset  = parseInt(req.query.offset);
     var order   = req.query.order;
-
+    
+    
     if (limit > ITEMS_LIMIT) {
       limit = ITEMS_LIMIT;
     }
@@ -117,14 +117,7 @@ listoffreVentre :function (req, res){
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       limit: (!isNaN(limit)) ? limit : null,
       offset: (!isNaN(offset)) ? offset : null,
- 
-            include:[
-            {
-              model: models.User,
-              attributes: [ 'prenom', 'nom','numtel' ], 
-            }
-            
-          ]
+     
      // }]
     }).then(function(OffreVentes) {
       if (OffreVentes) {
@@ -136,6 +129,71 @@ listoffreVentre :function (req, res){
       console.log(err);
       res.status(500).json({ "error": "invalid fields" });
     });
+  },
+
+  
+  getOffreVenteByCritere : function(req, res) {
+
+    var marque   = req.body.marque;
+    var modele = req.body.modele;
+    var prix = req.body.prix;
+    var annee = req.body.annee;
+    var kilometre = req.body.kilometre;
+    var carburant = req.body.carburant;
+    var boitevitesse = req.body.boitevitesse;
+    const Op = Sequelize.Op;
+
+    var opemarque ;
+    var opeannee;
+    var whereCondition = {};
+
+    whereCondition['1'] = 1;
+   
+
+    if (marque != null) {
+     whereCondition['marque'] = marque;
+    }
+    if (modele != null) {
+      whereCondition['model'] = modele;
+    }
+
+    if (prix != null) {
+     
+    }
+    if (annee != null) {
+     
+    }
+    if (kilometre != null) {
+      
+    }
+    if (carburant != null) {
+      
+    }
+   
+    console.log(whereCondition)
+    models.OffreVente.findAll({
+      where: 
+        whereCondition
+      ,
+
+      /*order: [(order != null) ? order.split(':') : ['marque', 'ASC']],
+     // attributes:['lieuDep'],
+      attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
+      limit: (!isNaN(limit)) ? limit : null,
+      offset: (!isNaN(offset)) ? offset : null,*/
+     
+        
+    }).then(function(marques) {
+      if (marques) {
+        res.status(200).json(marques);
+      } else {
+        res.status(404).json({ "error": "Pas de marques trouvés" });
+      }
+    }).catch(function(err) {
+      console.log(err);
+      res.status(500).json({ "error": "invalid fields" });
+    });
+
   }
 
 }
