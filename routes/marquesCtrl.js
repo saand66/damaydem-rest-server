@@ -13,18 +13,18 @@ const ITEMS_LIMIT = 1000;
 
 module.exports = {
 
-  gelmodelByMarque :function(req, res){
+  getmodelByMarque :function(req, res){
     var fields  = req.query.fields;
     var limit   = parseInt(req.query.limit);
     var offset  = parseInt(req.query.offset);
     var order   = req.query.order;
-    var marqueId = req.body.marqueId;
-
+    var marqueId = req.body.id;
 
     if (limit > ITEMS_LIMIT) {
       limit = ITEMS_LIMIT;
     }
-console.log("marqueId :", marqueId);
+
+    
     asyncLib.waterfall([
       function(done) {
         models.Marque.findOne({

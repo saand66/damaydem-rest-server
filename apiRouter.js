@@ -37,8 +37,8 @@ apiRouter.route('/offreVentes/').get(offreVenteCtrl.listoffreVentre);
 apiRouter.route('/offreVentes/filtre/').post(offreVenteCtrl.getOffreVenteByCritere);
 
 //Marques and Modeles
-apiRouter.route('/marques').get(marquesCtrl.getAllMarque);
-apiRouter.route('/marques/modeles').post(marquesCtrl.gelmodelByMarque);
+apiRouter.route('/marques/').get(marquesCtrl.getAllMarque);
+apiRouter.route('/marques/modeles').post(marquesCtrl.getmodelByMarque);
 
 
 return apiRouter;

@@ -118,6 +118,12 @@ listoffreVentre :function (req, res){
       limit: (!isNaN(limit)) ? limit : null,
       offset: (!isNaN(offset)) ? offset : null,
      
+      include: [
+        {
+          model: models.User,
+          attributes: [ 'prenom', 'nom','numtel' ], 
+        }
+      ]
      // }]
     }).then(function(OffreVentes) {
       if (OffreVentes) {
@@ -147,27 +153,27 @@ listoffreVentre :function (req, res){
     var opeannee;
     var whereCondition = {};
 
-    whereCondition['1'] = 1;
+    //whereCondition['1'] = 1;
    
 
     if (marque != null) {
-     whereCondition['marque'] = marque;
+     whereCondition['marque'] = marque.marque;
     }
     if (modele != null) {
-      whereCondition['model'] = modele;
+      whereCondition['model'] = modele.modele;
     }
 
     if (prix != null) {
-     
+      whereCondition['prix'] = prix;
     }
     if (annee != null) {
-     
+      whereCondition['annee'] = annee;
     }
     if (kilometre != null) {
-      
+      whereCondition['kilometre'] = kilometre;
     }
     if (carburant != null) {
-      
+      whereCondition['carburant'] = carburant;
     }
    
     console.log(whereCondition)
