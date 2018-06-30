@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     prix: DataTypes.INTEGER,
     kilometrage: DataTypes.INTEGER,
     boitevit: DataTypes.STRING,
+    carburant: DataTypes.STRING,
     couleur: DataTypes.STRING,
     douane: DataTypes.BOOLEAN,
     isurgent: DataTypes.BOOLEAN,
