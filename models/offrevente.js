@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   var OffreVente = sequelize.define('OffreVente', {
     marque: DataTypes.STRING,
-    model: DataTypes.STRING,
+    modele: DataTypes.STRING,
     annee: DataTypes.STRING,
     prix: DataTypes.INTEGER,
     kilometrage: DataTypes.INTEGER,

@@ -59,7 +59,7 @@ module.exports = {
 
           models.OffreVente.create({
              marque: marque,
-             model: model,
+             modele: modele,
              annee: annee,
              carburant: carburant,
              prix: prix,
@@ -143,6 +143,8 @@ listoffreVentre :function (req, res){
     var marque   = req.body.marque;
     var modele = req.body.modele;
     var prix = req.body.prix;
+    var prixMin = req.body.prixMin;
+    var prixMax = req.body.prixMax;
     var annee = req.body.annee;
     var kilometre = req.body.kilometre;
     var carburant = req.body.carburant;
@@ -152,6 +154,14 @@ listoffreVentre :function (req, res){
     var opemarque ;
     var opeannee;
     var whereCondition = {};
+    var anneeCondition = {};
+    var kilometreCondition = {};
+    var prixCondition = {};
+    var prixMinCondition = {};
+    var prixMaxCondition = {};
+    var anneeCondition = {};
+    
+   
 
     //whereCondition['1'] = 1;
    
@@ -160,17 +170,28 @@ listoffreVentre :function (req, res){
      whereCondition['marque'] = marque.marque;
     }
     if (modele != null) {
-      whereCondition['model'] = modele.modele;
+      whereCondition['modele'] = modele.modele;
     }
 
-    if (prix != null) {
-      whereCondition['prix'] = prix;
+
+    if (prixMax != null && prixMin != null)  {
+      prixCondition['$between'] = [parseInt(prixMin),parseInt(prixMax)];
+      whereCondition['prix'] = prixCondition;
+    }else if (prixMin != null) {
+      prixMinCondition['$gte'] = parseInt(prixMin);
+      whereCondition['prix'] = prixMinCondition;
+    }else if (prixMax != null) {
+      prixMaxCondition['$lte'] = parseInt(prixMax);
+      whereCondition['prix'] = prixMaxCondition;
     }
+
     if (annee != null) {
-      whereCondition['annee'] = annee;
+      anneeCondition['$lte'] = parseInt(annee);
+      whereCondition['annee'] = anneeCondition;
     }
     if (kilometre != null) {
-      whereCondition['kilometre'] = kilometre;
+      kilometreCondition['$lte'] = parseInt(kilometre);
+      whereCondition['kilometre'] = kilometreCondition;
     }
     if (carburant != null) {
       whereCondition['carburant'] = carburant;
@@ -187,13 +208,19 @@ listoffreVentre :function (req, res){
       attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
       limit: (!isNaN(limit)) ? limit : null,
       offset: (!isNaN(offset)) ? offset : null,*/
-     
-        
-    }).then(function(marques) {
-      if (marques) {
-        res.status(200).json(marques);
+
+      include: [
+        {
+          model: models.User,
+          attributes: [ 'prenom', 'nom','numtel' ], 
+        }
+      ]
+         
+    }).then(function(OffreVentes) {
+      if (OffreVentes) {
+        res.status(200).json(OffreVentes);
       } else {
-        res.status(404).json({ "error": "Pas de marques trouvés" });
+        res.status(404).json({ "error": "Pas d'offres trouvés" });
       }
     }).catch(function(err) {
       console.log(err);
